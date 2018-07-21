@@ -11,6 +11,7 @@ let led = Cfg.get('pins.led');
 let button = Cfg.get('pins.button');
 let device = Cfg.get('device.id');
 
+let connected = false;
 print("Starting device ", device);
 
 let getInfo = function() {
@@ -23,6 +24,10 @@ let getInfo = function() {
 /* Send data on button press */
 GPIO.set_button_handler(button, GPIO.PULL_UP, GPIO.INT_EDGE_NEG, 20, function() {
 	let message = getInfo();
+	if (!connected) {
+		print("Not connected, deferring.");
+		return;
+	}
 	HTTP.query({
 		url: 'https://us-central1-iowine-cloud.cloudfunctions.net/pushData',
 		body: message,
@@ -37,14 +42,14 @@ GPIO.set_button_handler(button, GPIO.PULL_UP, GPIO.INT_EDGE_NEG, 20, function() 
 	
 }, null);
 
-// Monitor network connectivity.
+/* Monitor network connectivity. */
 Event.addGroupHandler(Net.EVENT_GRP, function(ev, evdata, arg) {
 	print('Connection ev: ', ev)
 	print('Connection evdata: ', evdata)
 	print('Connection arg: ', arg)
 	if (ev === Net.STATUS_DISCONNECTED) {
 		connected = false;
-	} else if (ev == Net.STATUS_CONNECTED) {
+	} else if (ev === Net.STATUS_CONNECTED) {
 		connected = true;
 	}
 }, null);
