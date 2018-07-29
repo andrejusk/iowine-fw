@@ -1,6 +1,6 @@
-author: Andrejus Kostarevas
-description: Firmware for the iowine project.
-manifest_version: 2017-07-29
+author: Andrejus Kostarevas <andrejus@kostarevas.me>
+description: Firmware for the Internet of Wine project.
+
 arch: cc3220
 version: 0.1
 
@@ -8,17 +8,15 @@ libs_version: ${mos.version}
 modules_version: ${mos.version}
 mongoose_os_version: ${mos.version}
 
-config_schema:
-  - ["i2c.enable", true]
+filesystem:
+  - fs
 
 sources:
   - src
 
-filesystem:
-  - fs
-
 libs:
+  # Demo
   - origin: https://github.com/mongoose-os-libs/js-demo-bundle
 
-ffi_symbols:
-  - mgos_*
+
+manifest_version: 2017-07-29
