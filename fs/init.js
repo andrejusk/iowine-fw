@@ -13,7 +13,7 @@ let device = Cfg.get('device.id');
 
 /* mJS C functions */
 ffi('void tempInit()')();
-let tempGet = ffi('void tempGet()')
+let tempGet = ffi('void tempGet()');
 
 print("Starting device ", device);
 
