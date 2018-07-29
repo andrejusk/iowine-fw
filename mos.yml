@@ -1,8 +1,9 @@
 author: Andrejus Kostarevas
 description: Firmware for the iowine project.
+manifest_version: 2017-07-29
 arch: cc3220
 version: 0.1
-manifest_version: 2017-07-29
+
 libs_version: ${mos.version}
 modules_version: ${mos.version}
 mongoose_os_version: ${mos.version}
@@ -10,8 +11,6 @@ mongoose_os_version: ${mos.version}
 config_schema:
   - ["i2c.enable", true]
 
-tags:
-  - js
 sources:
   - src
 
@@ -20,3 +19,6 @@ filesystem:
 
 libs:
   - origin: https://github.com/mongoose-os-libs/js-demo-bundle
+
+ffi_symbols:
+  - mgos_*
