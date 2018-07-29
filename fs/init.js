@@ -13,28 +13,26 @@ let device = Cfg.get('device.id');
 
 print("Starting device ", device);
 
+let getHeader = function() {
+	return {
+		device: device
+	};
+};
+
 let getData = function() {
-	return JSON.stringify({
+	return {
 		foo: "bar"
-	});
+	};
 };
 
 /* Send data on button press */
 GPIO.set_button_handler(button, GPIO.PULL_UP, GPIO.INT_EDGE_NEG, 20, function() {
-	let data = getData();
 	HTTP.query({
-		url: 'https://us-central1-iowine-cloud.cloudfunctions.net/pushData',
-		body: data,
-		method: 'POST',
-		headers: {
-			device: device
-		},
-		success: function(body, http) {
-			print("Success: ", body, http);
-		},
-		error: function(err) {
-			print("Error: ", err);
-		}
+		url: 'http://us-central1-iowine-cloud.cloudfunctions.net/pushData',
+		headers: getHeader(),
+		data: getData(),
+		success: function(body, http) { print("Success: ", body, http); },
+		error: function(err) { print("Error: ", err); }
 	});
-	print('Request sent.');
+	print('Request sent...');
 }, null);
