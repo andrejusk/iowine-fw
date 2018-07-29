@@ -11,9 +11,14 @@ let led = Cfg.get('pins.led');
 let button = Cfg.get('pins.button');
 let device = Cfg.get('device.id');
 
+/* mJS C functions */
+ffi('void tempInit()')();
+let tempGet = ffi('void tempGet()')
+
 print("Starting device ", device);
 
 let getData = function() {
+	tempGet();
 	return {
 		device: device,
 		foo: "bar"

@@ -12,6 +12,8 @@ config_schema:
 
 tags:
   - js
+sources:
+  - src
 
 filesystem:
   - fs
