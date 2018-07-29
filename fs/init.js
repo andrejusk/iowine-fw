@@ -14,27 +14,27 @@ let device = Cfg.get('device.id');
 print("Starting device ", device);
 
 let getData = function() {
-	return JSON.stringify({
+	return {
+		device: device,
 		foo: "bar"
-	});
+	};
 };
 
 /* Send data on button press */
 GPIO.set_button_handler(button, GPIO.PULL_UP, GPIO.INT_EDGE_NEG, 20, function() {
-	let data = getData();
+	/* MOS HTTP API */
 	HTTP.query({
+		/* Firebase function endpoint */
 		url: 'https://us-central1-iowine-cloud.cloudfunctions.net/pushData',
-		body: data,
-		method: 'POST',
+		/* Set appropriate content header */
 		headers: {
-			device: device
+			'Content-Type': 'application/json'
 		},
-		success: function(body, http) {
-			print("Success: ", body, http);
-		},
-		error: function(err) {
-			print("Error: ", err);
-		}
+		/* POST Request body */
+		data: getData(),
+		/* Handler functions */
+		success: function(body, http) { print("Success: ", body, http); },
+		error: function(err) { print("Error: ", err); }
 	});
-	print('Request sent.');
+	print('Request sent...');
 }, null);
