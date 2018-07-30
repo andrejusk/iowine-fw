@@ -25,6 +25,10 @@ bool tempInit() {
     }
 }
 
-void tempGet() {
-    LOG(LL_INFO, ("tempGet"));
+float tempGet() {
+    return mgos_si7021_getTemperature(s_si7021);
+}
+
+float humGet() {
+    return mgos_si7021_getHumidity(s_si7021);
 }

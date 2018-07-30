@@ -13,14 +13,16 @@ let device = Cfg.get('device.id');
 
 /* mJS C functions */
 print("tempInit: ", ffi('bool tempInit()')());
-let tempGet = ffi('void tempGet()');
+let tempGet = ffi('float tempGet()');
+let humGet = ffi('float humGet()');
 
 print("Starting device ", device);
 
 let getData = function() {
 	return {
 		device: device,
-		sensor: tempGet(),
+		temperature: tempGet(),
+		humidity: humGet(),
 		foo: "bar"
 	};
 };
