@@ -11,11 +11,18 @@ let led = Cfg.get('pins.led');
 let button = Cfg.get('pins.button');
 let device = Cfg.get('device.id');
 
+/* mJS C functions */
+print("tempInit: ", ffi('bool tempInit()')());
+let tempGet = ffi('float tempGet()');
+let humGet = ffi('float humGet()');
+
 print("Starting device ", device);
 
 let getData = function() {
 	return {
 		device: device,
+		temperature: tempGet(),
+		humidity: humGet(),
 		foo: "bar"
 	};
 };
