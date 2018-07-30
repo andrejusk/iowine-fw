@@ -18,5 +18,10 @@ libs:
   # Demo
   - origin: https://github.com/mongoose-os-libs/js-demo-bundle
 
+  # # Custom Si7021-i2c library
+  - origin: https://github.com/andrejusk/si7021-i2c
+
+config_schema:
+  - ["i2c.enable", true]
 
 manifest_version: 2017-07-29

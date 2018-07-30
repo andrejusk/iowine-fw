@@ -12,15 +12,15 @@ let button = Cfg.get('pins.button');
 let device = Cfg.get('device.id');
 
 /* mJS C functions */
-ffi('void tempInit()')();
+print("tempInit: ", ffi('bool tempInit()')());
 let tempGet = ffi('void tempGet()');
 
 print("Starting device ", device);
 
 let getData = function() {
-	tempGet();
 	return {
 		device: device,
+		sensor: tempGet(),
 		foo: "bar"
 	};
 };
