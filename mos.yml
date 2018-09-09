@@ -23,5 +23,8 @@ libs:
 
 config_schema:
   - ["i2c.enable", true]
+  - ["wifi.ap.enable", true]
+  - ["wifi.ap.ssid", "IoWine-??????"]
+  - ["wifi.ap.pass", "winesetup"]
 
 manifest_version: 2017-07-29
