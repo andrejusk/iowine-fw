@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="setup.css">
+    <script src="zepto.min.js"></script>
+  </head>
+  <body>
+    <nav class="nav" tabindex="-1" onclick="this.focus()">
+      <div class="container">
+        <a class="pagename current" href="https://iowine-cloud.firebaseapp.com/">IoWine</a>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="hero">
+        <h1>Hi!</h1>
+        <p>Welcome to your new IoWine device. Please enter your credentials below!</p>
+      </div>
+      <div class="row form">
+        <div class="col c4">
+          <div class="form-control">
+            <label for="ssid">WiFi Network:</label>
+            <input type="text" class="smooth" id="ssid" name="ssid" placeholder="Type WiFi network...">
+          </div>
+          <div class="form-control">
+            <label for="pass">WiFi Password:</label>
+            <input type="text" class="smooth" id="pass" name="pass" placeholder="Type WiFi password...">
+          </div>
+          <div class="form-control"><button href="#" class="btn btn-sm btn-a" id="save">Save WiFi settings</button></div>
+        </div>
+      </div>
+    </div>
+    <script src="setup.js"></script>
+  </body>
+</html>
