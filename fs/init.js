@@ -15,6 +15,7 @@ let device = Cfg.get('device.id');
 print("tempInit: ", ffi('bool tempInit()')());
 let tempGet = ffi('float tempGet()');
 let humGet = ffi('float humGet()');
+let sleep = ffi('void sleep()');
 
 print("Starting device ", device);
 
@@ -40,8 +41,14 @@ GPIO.set_button_handler(button, GPIO.PULL_UP, GPIO.INT_EDGE_NEG, 20, function() 
 		/* POST Request body */
 		data: getData(),
 		/* Handler functions */
-		success: function(body, http) { print("Success: ", body, http); },
-		error: function(err) { print("Error: ", err); }
+		success: function(body, http) { 
+			print("Success: ", body, http);
+			sleep();
+		},
+		error: function(err) {
+			print("Error: ", err); 
+			sleep();
+		}
 	});
-	print('Request sent...');
+	print('Request sent... sleeping...');
 }, null);

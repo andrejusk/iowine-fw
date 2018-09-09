@@ -2,6 +2,11 @@
 #include "mgos_i2c.h"
 #include "mgos_si7021.h"
 
+#include <ti/drivers/Power.h>
+#include <ti/drivers/power/PowerCC32XX.h>
+
+#include "CC3220SF_LAUNCHXL.h"
+
 static struct mgos_si7021 *s_si7021;
 
 bool tempInit() {
@@ -31,4 +36,8 @@ float tempGet() {
 
 float humGet() {
     return mgos_si7021_getHumidity(s_si7021);
+}
+
+void sleep() {
+    Power_enablePolicy();
 }
