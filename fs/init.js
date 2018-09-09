@@ -51,6 +51,6 @@ let sendData = function() {
 			sendData();
 		}
 	});
-}
+};
 
 sendData();
