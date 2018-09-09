@@ -59,5 +59,5 @@ let sendData = function() {
 /* Entry point */
 print("Starting device ", device);
 sendData();
-//TODO: Setup WiFi credentials using AP or BLE
+//TODO: Look for other AP devices
 //TODO: Check for updated configs before going to sleep
