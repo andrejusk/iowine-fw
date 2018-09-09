@@ -11,13 +11,13 @@ let led = Cfg.get('pins.led');
 let button = Cfg.get('pins.button');
 let device = Cfg.get('device.id');
 
+print("Starting device ", device);
+
 /* mJS C functions */
 print("tempInit: ", ffi('bool tempInit()')());
 let tempGet = ffi('float tempGet()');
 let humGet = ffi('float humGet()');
-let sleep = ffi('void sleep()');
-
-print("Starting device ", device);
+let shutdown = ffi('void cc_power_shutdown(int)');
 
 let getData = function() {
 	return {
@@ -28,8 +28,7 @@ let getData = function() {
 	};
 };
 
-/* Send data on button press */
-GPIO.set_button_handler(button, GPIO.PULL_UP, GPIO.INT_EDGE_NEG, 20, function() {
+let sendData = function() {
 	/* MOS HTTP API */
 	HTTP.query({
 		/* Firebase function endpoint */
@@ -43,12 +42,15 @@ GPIO.set_button_handler(button, GPIO.PULL_UP, GPIO.INT_EDGE_NEG, 20, function() 
 		/* Handler functions */
 		success: function(body, http) { 
 			print("Success: ", body, http);
-			sleep();
+			/* Sleep */
+			shutdown(30);
 		},
 		error: function(err) {
-			print("Error: ", err); 
-			sleep();
+			print("Error: ", err);
+			/* Try again shortly */
+			sendData();
 		}
 	});
-	print('Request sent... sleeping...');
-}, null);
+}
+
+sendData();
