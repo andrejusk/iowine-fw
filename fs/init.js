@@ -7,24 +7,26 @@ load('api_sys.js');
 load('api_timer.js');
 load('api_http.js');
 
+/* Configs */
 let led = Cfg.get('pins.led');
 let button = Cfg.get('pins.button');
 let device = Cfg.get('device.id');
+//TODO: Default delays (?) Should be server side
+//TODO: Server address (!)
 
-print("Starting device ", device);
 
 /* mJS C functions */
-print("tempInit: ", ffi('bool tempInit()')());
-let tempGet = ffi('float tempGet()');
-let humGet = ffi('float humGet()');
+print("tempInit: ", ffi('bool si7021_init()')());
+let tempGet = ffi('float si7021_temp_get()');
+let humGet = ffi('float si7021_hum_get()');
 let shutdown = ffi('void cc_power_shutdown(int)');
 
 let getData = function() {
 	return {
 		device: device,
 		temperature: tempGet(),
-		humidity: humGet(),
-		foo: "bar"
+		humidity: humGet()
+		//TODO: Device-side time
 	};
 };
 
@@ -52,5 +54,10 @@ let sendData = function() {
 		}
 	});
 };
+//TODO: Move stuff into seperate files
 
+/* Entry point */
+print("Starting device ", device);
 sendData();
+//TODO: Setup WiFi credentials using AP or BLE
+//TODO: Check for updated configs before going to sleep
