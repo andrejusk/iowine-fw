@@ -11,9 +11,6 @@ load('api_http.js');
 let led = Cfg.get('pins.led');
 let button = Cfg.get('pins.button');
 let device = Cfg.get('device.id');
-//TODO: Default delays (?) Should be server side
-//TODO: Server address (!)
-
 
 /* mJS C functions */
 print("tempInit: ", ffi('bool si7021_init()')());
@@ -54,10 +51,7 @@ let sendData = function() {
 		}
 	});
 };
-//TODO: Move stuff into seperate files
 
 /* Entry point */
 print("Starting device ", device);
 sendData();
-//TODO: Look for other AP devices
-//TODO: Check for updated configs before going to sleep
