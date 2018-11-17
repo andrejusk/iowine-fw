@@ -20,10 +20,10 @@ let shutdown = ffi('void cc_power_shutdown(int)');
 
 let getData = function() {
 	return {
+		time: Timer.now(),
 		device: device,
 		temperature: tempGet(),
 		humidity: humGet()
-		//TODO: Device-side time
 	};
 };
 
@@ -47,7 +47,7 @@ let sendData = function() {
 		error: function(err) {
 			print("Error: ", err);
 			/* Try again shortly */
-			sendData();
+			shutdown(5);
 		}
 	});
 };
