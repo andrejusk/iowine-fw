@@ -1,19 +1,53 @@
+/* Get current config */
 $.ajax({
-    url: '/rpc/Config.Get',
-    success: function(data) {
-      $('#ssid').val(data.wifi.sta.ssid);
-      $('#pass').val(data.wifi.sta.pass);
-    },
-  });
+  url: '/rpc/Config.Get',
+  success: function(data) {
+    $('#ssid').val(data.wifi.sta.ssid);
+    $('#pass').val(data.wifi.sta.pass);
+  },
+});
 
-  $('#save').on('click', function() {
-    $.ajax({
-      url: '/rpc/Config.Set',
-      data: JSON.stringify({config: {wifi: {sta: {enable: true, ssid: $('#ssid').val(), pass: $('#pass').val()}}}}),
-      type: 'POST',
-      success: function(data) {
-        $.ajax({url: '/rpc/Config.Save', type: 'POST', data: JSON.stringify({"reboot": true})});
-        window.location.href = "https://iowine-cloud.firebaseapp.com/";
-      },
-    })
-  });
+/* On submit */
+$('#save').on('click', function() {
+
+  /* Set config */
+  $.ajax({
+    url: '/rpc/Config.Set',
+    data: JSON.stringify({
+      config: {
+        wifi: {
+          ap: {
+            enable: false
+          },
+          sta: {
+            enable: true, 
+            ssid: $('#ssid').val(), 
+            pass: $('#pass').val()
+          } 
+        }
+      }
+    }),
+    type: 'POST',
+
+    /* On set */
+    success: function(data) {
+
+      /* Save config */
+      $.ajax({
+        url: '/rpc/Config.Save', 
+        type: 'POST', 
+        data: JSON.stringify({
+          "reboot": true
+        }),
+
+        /* On save */
+        success: function(data) {
+
+          /* Redirect */
+          window.location.href = "https://iowine-cloud.firebaseapp.com/";
+
+        }
+      });
+    },
+  })
+});
