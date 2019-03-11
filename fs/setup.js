@@ -3,10 +3,13 @@
  * @param {*} data Config values.
  */
 let setFields = function(data) {
+  /* Device name */
+  $('#device').html(data.device.id);
+  /* Wi-Fi required */
   $('#ssid').val(data.wifi.sta.ssid);
   $('#pass').val(data.wifi.sta.pass);
+  /* Wi-Fi optional */
   $('#user').val(data.wifi.sta.user);
-  $('#device').val(data.device.id);
 };
 
 /**
