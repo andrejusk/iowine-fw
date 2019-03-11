@@ -2,7 +2,7 @@ author: Andrejus Kostarevas <iowine@kostarevas.me>
 description: Firmware for the Internet of Wine project.
 
 arch: cc3220
-version: 0.2
+version: 0.3
 
 libs_version: ${mos.version}
 modules_version: ${mos.version}
@@ -26,5 +26,7 @@ config_schema:
   - ["wifi.ap.enable", true]
   - ["wifi.ap.ssid", "IoWine-??????"]
   - ["wifi.ap.pass", "winesetup"]
+  - ["wifi.sta_connect_timeout", 30]
+  - ["wifi.sta.ca_cert", "eduroam.crt"]
 
 manifest_version: 2017-07-29
