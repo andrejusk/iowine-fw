@@ -1,16 +1,3 @@
-
-/*
-  Entry point.
-*/
-
-/* Get current config */
-$.ajax({ url: '/rpc/Config.Get', success: setFields });
-
-/* On submit */
-$('#save').on('click', setConfig);
-
-
-
 /**
  * Update fields from Config.Get.
  * @param {*} data Config values.
@@ -79,3 +66,14 @@ let saveConfig = function(_) {
 let redirect = function(_) {
   window.location.href = "https://iowine-cloud.firebaseapp.com/";
 }
+
+
+/*
+  Entry point.
+*/
+
+/* Get current config */
+$.ajax({ url: '/rpc/Config.Get', success: setFields });
+
+/* On submit */
+$('#save').on('click', setConfig);
