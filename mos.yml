@@ -28,5 +28,6 @@ config_schema:
   - ["wifi.ap.pass", "winesetup"]
   - ["wifi.sta_connect_timeout", 30]
   - ["wifi.sta.ca_cert", "eduroam.crt"]
+  - ["wifi.sta.eap_method", "PEAP0_MSCHAPv2"]
 
 manifest_version: 2017-07-29
