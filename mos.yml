@@ -2,7 +2,7 @@ author: Andrejus Kostarevas <iowine@kostarevas.me>
 description: Firmware for the Internet of Wine project.
 
 arch: cc3220
-version: 0.2
+version: 0.3
 
 libs_version: ${mos.version}
 modules_version: ${mos.version}
